@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@mkkellogg/gaussian-splats-3d": "^0.4.7",
     "astro": "^5.15.3",
     "three": "^0.181.0"
   },

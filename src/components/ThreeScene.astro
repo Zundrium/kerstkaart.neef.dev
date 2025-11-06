@@ -1,30 +1,26 @@
-<canvas id="three-canvas"></canvas>
-
-<style>
-  #three-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    outline: none;
-  }
-</style>
 
 <script>
-  import * as SPLAT from '@mkkellogg/gaussian-splats-3d';
+//
+// GitHub van deze gsplat viewer
+// https://github.com/mkkellogg/GaussianSplats3D
+//
+import * as GaussianSplats3D from '@mkkellogg/gaussian-splats-3d';
 
-  const canvas = document.getElementById('three-canvas');
-  const viewer = new SPLAT.Viewer({
-    canvas: canvas,
-    selfDriven: false,
-  });
+const viewer = new GaussianSplats3D.Viewer({
+	'cameraUp': [0, -1, 0],
+	'initialCameraPosition': [-40, -50, -40],
+	'initialCameraLookAt': [0, -15, 0],
+	'sharedMemoryForWorkers': false
+});
 
-  viewer.addSplat(new SPLAT.Splat('/geom/scene.ksplat'))
-    .then(() => {
-      function animate() {
-        requestAnimationFrame(animate);
-        viewer.update();
-        viewer.render();
-      }
-      animate();
-    });
+viewer.addSplatScene('/geom/scene.ksplat', {
+	'splatAlphaRemovalThreshold': 5,
+	'showLoadingUI': true,
+	'position': [0, 1, 0],
+	'rotation': [0, 0, 0, 1],
+	'scale': [1.5, 1.5, 1.5]
+})
+	.then(() => {
+		viewer.start();
+	});
 </script>
